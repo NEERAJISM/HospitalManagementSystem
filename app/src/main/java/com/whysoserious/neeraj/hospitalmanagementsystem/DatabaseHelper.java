@@ -6,12 +6,11 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 /**
  * Created by Neeraj on 18-Mar-16.
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "HMS_DATABASE";
@@ -84,5 +83,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Message.message(context,"new entry inserted");
         return true;
     }
+
 
 }
