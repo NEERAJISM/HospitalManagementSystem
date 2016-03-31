@@ -136,10 +136,10 @@ public class Register extends AppCompatActivity {
                 } else {
 
                     //CHECK WHETHER THE ENTRY ALREADY EXISTS
-                    Cursor y = dbh.checkduplicates_in_user_credentials(unames, passwords);
-                    if (y.moveToFirst()) {
-                        Message.message(Register.this, "User Already Exists");
-                    } else {
+                    //Cursor y = dbh.checkduplicates_in_user_credentials(unames, passwords);
+                    //if (y.moveToFirst()) {
+                     //   Message.message(Register.this, "User Already Exists");
+                    //} else {
                         //SETUP DATABASE QUERY
                         if (dds.length() == 1)
                             dds = "0" + dds;
@@ -148,7 +148,6 @@ public class Register extends AppCompatActivity {
                         //SQLiteDatabase db = dbh.getWritableDatabase();
                         boolean b = dbh.insert_user_credentials(fnames, lnames, ages, dobs, citys, pincodes, unames, passwords, mobnos, utypes, sexs, bgroups);
                         if (b) {
-                            Message.message(Register.this, "Registration Sucessful");
                             if (utypes.equals("Patient")) {
                                 Intent i = new Intent(Register.this, Patient.class);
                                 startActivity(i);
@@ -162,12 +161,9 @@ public class Register extends AppCompatActivity {
                                 Intent i = new Intent(Register.this, Desktop_Admin.class);
                                 startActivity(i);
                             }
-
                             finish();
-                        } else {
-                            Message.message(Register.this, "Registration UnSucessful");
                         }
-                    }
+                    //}
                 }
             }
         });

@@ -14,10 +14,10 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "HMS_DATABASE";
-    private static final String TABLE_NAME = "USER_CREDENTIALS";
+    private static final String TABLE_NAME_USER = "USER_CREDENTIALS";
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 1);
         this.context = context;
     }
 
@@ -25,23 +25,22 @@ class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         try {
-            db.execSQL("CREATE TABLE "+TABLE_NAME+" (" +
-                            "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                            "first_name VARCHAR(50)," +
-                            "last_name VARCHAR(50)," +
-                            "age VARCHAR(10)," +
-                            "sex VARCHAR(10)," +
-                            "dob VARCHAR(10)," +
-                            "blood_group VARCHAR(10)," +
-                            "u_type VARCHAR(15)," +
-                            "city VARCHAR(50)," +
-                            "pincode VARCHAR(10)," +
-                            "mobile_number VARCHAR(15)," +
-                            "password VARCHAR(50)," +
-                            "user_name VARCHAR(50));"
+            db.execSQL("CREATE TABLE "+TABLE_NAME_USER+" (" +
+                            "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                            "first_name VARCHAR," +
+                            "last_name VARCHAR," +
+                            "age VARCHAR," +
+                            "sex VARCHAR," +
+                            "dob VARCHAR," +
+                            "blood_group VARCHAR," +
+                            "u_type VARCHAR," +
+                            "city VARCHAR," +
+                            "pincode VARCHAR," +
+                            "mobile_number VARCHAR," +
+                            "password VARCHAR," +
+                            "user_name VARCHAR);"
             );
-
-            Message.message(context,"Database Created");
+            //Message.message(context,"Database Created");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,7 +55,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     //CHECHK THAT THE REGISTERED USER ALREADY EXIST
     public Cursor checkduplicates_in_user_credentials(String user_name ,String password){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery("select * from USER_CREDENTIALS where user_name=? and password=?",new String[] {user_name,password});
+        Cursor res =  db.rawQuery("select * "+TABLE_NAME_USER+" where user_name=? and password=?",new String[] {user_name,password});
         return res;
     }
 
@@ -76,13 +75,18 @@ class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("pincode",pincodes);
         contentValues.put("u_type",utypes);
         contentValues.put("mobile_number", mobnos);
-        contentValues.put("username",unames);
-        contentValues.put("password",passwords);
+        contentValues.put("username", unames);
+        contentValues.put("password", passwords);
 
-        db.insert(TABLE_NAME, null, contentValues);
-        Message.message(context,"new entry inserted");
-        return true;
+        long l = db.insert(TABLE_NAME_USER, null, contentValues);
+
+        if(l != -1) {
+            Message.message(context, "new entry inserted");
+            return true;
+        }
+        else{
+            Message.message(context, "Registration Failed");
+            return false;
+        }
     }
-
-
 }
