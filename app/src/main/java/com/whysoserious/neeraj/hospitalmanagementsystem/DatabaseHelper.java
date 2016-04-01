@@ -10,10 +10,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by Neeraj on 18-Mar-16.
  */
-class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    private static final String DATABASE_NAME = "HMS_DATABASE";
+    private static final String DATABASE_NAME = "HMS_DATABASE.db";
     private static final String TABLE_NAME_USER = "USER_CREDENTIALS";
 
     public DatabaseHelper(Context context) {
@@ -38,7 +38,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
                             "pincode VARCHAR," +
                             "mobile_number VARCHAR," +
                             "password VARCHAR," +
-                            "user_name VARCHAR);"
+                            "username VARCHAR);"
             );
             //Message.message(context,"Database Created");
         } catch (SQLException e) {
@@ -55,7 +55,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     //CHECHK THAT THE REGISTERED USER ALREADY EXIST
     public Cursor checkduplicates_in_user_credentials(String user_name ,String password){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery("select * "+TABLE_NAME_USER+" where user_name=? and password=?",new String[] {user_name,password});
+        Cursor res =  db.rawQuery("select * from "+TABLE_NAME_USER+" where username=? and password=?",new String[] {user_name,password});
         return res;
     }
 
