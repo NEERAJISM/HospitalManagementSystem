@@ -12,6 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.whysoserious.neeraj.hospitalmanagementsystem.Desktop_Admin.Desktop_Admin;
+import com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Doctor;
+import com.whysoserious.neeraj.hospitalmanagementsystem.Patient.Patient;
+import com.whysoserious.neeraj.hospitalmanagementsystem.Staff_Member.Staff_Member;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +57,10 @@ public class Login extends AppCompatActivity {
 
                 Cursor y = dbh.checkduplicates_in_user_credentials(usernames, passwords);
 
-                while(y.moveToNext()){
+                /*while(y.moveToNext()){
+
+
+
                     Message.message(Login.this,y.getString(0));
                     Message.message(Login.this,y.getString(1));
                     Message.message(Login.this,y.getString(2));
@@ -61,16 +69,30 @@ public class Login extends AppCompatActivity {
 
                 y.close();
                 dbh.close();
-
-
-                /*if (y.moveToFirst()) {
+*/
+                if (y.moveToFirst()) {
+                    String ut = y.getString(7);
                     Message.message(Login.this, "Welcome");
+
+                    Intent i;
+                    if(ut.equals("Doctor")) {
+                        i = new Intent(Login.this, Doctor.class);
+                    }
+                    else if(ut.equals("Patient")){
+                        i = new Intent(Login.this, Patient.class);
+                    }
+                    else if(ut.equals("Staff Member")){
+                        i = new Intent(Login.this, Staff_Member.class);
+                    }
+                    else{
+                        i = new Intent(Login.this, Desktop_Admin.class);
+                    }
+                    startActivity(i);
                 } else {
                     Message.message(Login.this, "No Such User Exists");
-                    Message.message(Login.this, "Please Register");
-                }*/
+                    Message.message(Login.this, "Please Register Your self");
+                }
             }
         });
-
     }
 }
