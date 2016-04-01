@@ -61,19 +61,22 @@ public class Login extends AppCompatActivity {
                     String ut = y.getString(7);
                     Message.message(Login.this, "Welcome");
 
+                    Bundle b = new Bundle();
+                    b.putString("username",usernames);
+                    b.putString("password",passwords);
+
                     Intent i;
-                    if(ut.equals("Doctor")) {
+                    if (ut.equals("Doctor")) {
                         i = new Intent(Login.this, Doctor.class);
-                    }
-                    else if(ut.equals("Patient")){
+                    } else if (ut.equals("Patient")) {
                         i = new Intent(Login.this, Patient.class);
-                    }
-                    else if(ut.equals("Staff Member")){
+                    } else if (ut.equals("Staff Member")) {
                         i = new Intent(Login.this, Staff_Member.class);
-                    }
-                    else{
+                    } else {
                         i = new Intent(Login.this, Desktop_Admin.class);
                     }
+
+                    i.putExtras(b);
                     startActivity(i);
                 } else {
                     Message.message(Login.this, "No Such User Exists");
