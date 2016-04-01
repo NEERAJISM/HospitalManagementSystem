@@ -53,6 +53,8 @@ public class Login extends AppCompatActivity {
                 Cursor y = dbh.checkduplicates_in_user_credentials(usernames, passwords);
 
                 while(y.moveToNext()){
+
+                    //hakuna
                     Message.message(Login.this,y.getString(0));
                     Message.message(Login.this,y.getString(1));
                     Message.message(Login.this,y.getString(2));
