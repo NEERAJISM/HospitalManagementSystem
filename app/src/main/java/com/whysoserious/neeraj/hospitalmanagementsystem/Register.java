@@ -154,10 +154,10 @@ public class Register extends AppCompatActivity {
                             } else if (utypes.equals("Doctor")) {
                                 Intent i = new Intent(Register.this, Doctor.class);
                                 startActivity(i);
-                            } else if (utypes.equals("Staff Member")) {
+                            } else if (utypes.equals("Staff_Member")) {
                                 Intent i = new Intent(Register.this, Staff_Member.class);
                                 startActivity(i);
-                            } else if (utypes.equals("Desktop Admin")) {
+                            } else if (utypes.equals("Desktop_Admin")) {
                                 Intent i = new Intent(Register.this, Desktop_Admin.class);
                                 startActivity(i);
                             }
