@@ -13,20 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="100"
         >
 
         <TextView
-            android:layout_weight="50"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal"
-            android:text="Welcome "
-            android:textSize="30dp" />
-
-        <TextView
-            android:layout_weight="50"
             android:id="@+id/tv_da_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,5 +36,17 @@
         android:textAllCaps="false"
         android:textSize="17dp" />
 
+    <!-- also delete values from all related entries-->
+
+    <Button
+        android:id="@+id/b_da_delete_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick"
+        android:padding="15dp"
+        android:text="Delete User"
+        android:textAllCaps="false"
+        android:textSize="17dp" />
 
 </LinearLayout>

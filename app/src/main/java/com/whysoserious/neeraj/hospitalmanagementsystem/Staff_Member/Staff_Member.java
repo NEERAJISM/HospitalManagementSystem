@@ -17,7 +17,7 @@ import com.whysoserious.neeraj.hospitalmanagementsystem.R;
  * Created by Neeraj on 20-Mar-16.
  */
 public class Staff_Member extends AppCompatActivity {
-    String username,password;
+    String username, password, user_type;
     DatabaseHelper dbh;
     TextView sname;
 
@@ -33,8 +33,9 @@ public class Staff_Member extends AppCompatActivity {
         Bundle bb = getIntent().getExtras();
         username = bb.getString("username");
         password = bb.getString("password");
+        user_type = bb.getString("user_type");
 
-        Cursor y = dbh.checkduplicates_in_user_credentials(username, password);
+        Cursor y = dbh.checkduplicates_in_user_credentials(username, password, getResources().getString(R.string.user_credentials));
 
         if (y.moveToFirst()) {
             String name = y.getString(1);
@@ -42,15 +43,15 @@ public class Staff_Member extends AppCompatActivity {
         }
     }
 
-    public void onClick(View view){
+    public void onClick(View view) {
 
         Intent i;
         Bundle b = new Bundle();
-        b.putString("username",username);
-        b.putString("password",password);
+        b.putString("username", username);
+        b.putString("password", password);
+        b.putString("user_type", user_type);
 
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.b_s_info:
                 i = new Intent(Staff_Member.this, Personal_Info.class);
                 break;

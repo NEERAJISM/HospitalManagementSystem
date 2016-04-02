@@ -41,7 +41,7 @@
         android:layout_gravity="center"
         android:onClick="onClick"
         android:padding="15dp"
-        android:text="Add/View Specialization"
+        android:text="Add/View Specializations"
         android:textAllCaps="false"
         android:textSize="17dp" />
 

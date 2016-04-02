@@ -36,7 +36,7 @@ public class Personal_Info extends AppCompatActivity {
         uname = (TextView) findViewById(R.id.username);
         pword = (TextView) findViewById(R.id.password);
 
-        Cursor y = db.checkduplicates_in_user_credentials(username, password);
+        Cursor y = db.checkduplicates_in_user_credentials(username, password, getResources().getString(R.string.user_credentials));
 
         if (y.moveToFirst()) {
             String name1 = y.getString(1);

@@ -22,7 +22,7 @@ import com.whysoserious.neeraj.hospitalmanagementsystem.Staff_Member.Staff_Membe
  */
 public class Doctor extends AppCompatActivity {
 
-    String username,password;
+    String username,password,user_type;
     DatabaseHelper dbh;
     TextView dname;
 
@@ -38,8 +38,9 @@ public class Doctor extends AppCompatActivity {
         Bundle bb = getIntent().getExtras();
         username = bb.getString("username");
         password = bb.getString("password");
+        user_type = bb.getString("user_type");
 
-        Cursor y = dbh.checkduplicates_in_user_credentials(username, password);
+        Cursor y = dbh.checkduplicates_in_user_credentials(username, password,getResources().getString(R.string.user_credentials));
 
         if (y.moveToFirst()) {
             String name = y.getString(1);
@@ -53,6 +54,7 @@ public class Doctor extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putString("username",username);
         b.putString("password",password);
+        b.putString("user_type",user_type);
 
         switch (view.getId())
         {

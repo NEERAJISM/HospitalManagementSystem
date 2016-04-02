@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hospital Management System</string>
+    <string name="user_credentials">"USER_CREDENTIALS</string>
+    <string name="doctor_leaves">DOCTOR_LEAVES</string>
 </resources>

@@ -55,15 +55,16 @@ public class Login extends AppCompatActivity {
                 usernames = username.getText().toString();
                 passwords = password.getText().toString();
 
-                Cursor y = dbh.checkduplicates_in_user_credentials(usernames, passwords);
+                Cursor y = dbh.checkduplicates_in_user_credentials(usernames, passwords, getResources().getString(R.string.user_credentials));
 
                 if (y.moveToFirst()) {
                     String ut = y.getString(7);
                     Message.message(Login.this, "Welcome");
 
                     Bundle b = new Bundle();
-                    b.putString("username",usernames);
-                    b.putString("password",passwords);
+                    b.putString("username", usernames);
+                    b.putString("password", passwords);
+                    b.putString("user_type", ut);
 
                     Intent i;
                     if (ut.equals("Doctor")) {

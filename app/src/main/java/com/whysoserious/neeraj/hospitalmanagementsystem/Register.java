@@ -136,7 +136,7 @@ public class Register extends AppCompatActivity {
                 } else {
 
                     //CHECK WHETHER THE ENTRY ALREADY EXISTS
-                    Cursor y = dbh.checkduplicates_in_user_credentials(unames, passwords);
+                    Cursor y = dbh.checkduplicates_in_user_credentials(unames, passwords, getResources().getString(R.string.user_credentials));
                     if (y.moveToFirst()) {
                         Message.message(Register.this, "User Already Exists");
                         Message.message(Register.this, "Login With Your Username and Password");
@@ -145,15 +145,16 @@ public class Register extends AppCompatActivity {
                         //SETUP DATABASE QUERY
                         if (dds.length() == 1)
                             dds = "0" + dds;
-                        dobs = dds + mms + yys;
+                        dobs = dds + " " + mms + " " + yys;
 
                         boolean b = dbh.insert_user_credentials(fnames, lnames, ages, dobs, citys, pincodes, unames, passwords, mobnos, utypes, sexs, bgroups);
                         if (b) {
 
                             Intent i;
                             Bundle bb = new Bundle();
-                            bb.putString("username",unames);
-                            bb.putString("password",passwords);
+                            bb.putString("username", unames);
+                            bb.putString("password", passwords);
+                            bb.putString("user_type",utypes);
 
                             if (utypes.equals("Patient")) {
                                 i = new Intent(Register.this, Patient.class);
@@ -161,7 +162,7 @@ public class Register extends AppCompatActivity {
                                 i = new Intent(Register.this, Doctor.class);
                             } else if (utypes.equals("Staff_Member")) {
                                 i = new Intent(Register.this, Staff_Member.class);
-                            } else{
+                            } else {
                                 i = new Intent(Register.this, Desktop_Admin.class);
                             }
 
