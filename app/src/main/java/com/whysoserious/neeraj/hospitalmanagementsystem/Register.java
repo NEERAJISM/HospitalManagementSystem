@@ -136,34 +136,40 @@ public class Register extends AppCompatActivity {
                 } else {
 
                     //CHECK WHETHER THE ENTRY ALREADY EXISTS
-                    //Cursor y = dbh.checkduplicates_in_user_credentials(unames, passwords);
-                    //if (y.moveToFirst()) {
-                     //   Message.message(Register.this, "User Already Exists");
-                    //} else {
+                    Cursor y = dbh.checkduplicates_in_user_credentials(unames, passwords);
+                    if (y.moveToFirst()) {
+                        Message.message(Register.this, "User Already Exists");
+                        Message.message(Register.this, "Login With Your Username and Password");
+                        finish();
+                    } else {
                         //SETUP DATABASE QUERY
                         if (dds.length() == 1)
                             dds = "0" + dds;
                         dobs = dds + mms + yys;
 
-                        //SQLiteDatabase db = dbh.getWritableDatabase();
                         boolean b = dbh.insert_user_credentials(fnames, lnames, ages, dobs, citys, pincodes, unames, passwords, mobnos, utypes, sexs, bgroups);
                         if (b) {
+
+                            Intent i;
+                            Bundle bb = new Bundle();
+                            bb.putString("username",unames);
+                            bb.putString("password",passwords);
+
                             if (utypes.equals("Patient")) {
-                                Intent i = new Intent(Register.this, Patient.class);
-                                startActivity(i);
+                                i = new Intent(Register.this, Patient.class);
                             } else if (utypes.equals("Doctor")) {
-                                Intent i = new Intent(Register.this, Doctor.class);
-                                startActivity(i);
+                                i = new Intent(Register.this, Doctor.class);
                             } else if (utypes.equals("Staff_Member")) {
-                                Intent i = new Intent(Register.this, Staff_Member.class);
-                                startActivity(i);
-                            } else if (utypes.equals("Desktop_Admin")) {
-                                Intent i = new Intent(Register.this, Desktop_Admin.class);
-                                startActivity(i);
+                                i = new Intent(Register.this, Staff_Member.class);
+                            } else{
+                                i = new Intent(Register.this, Desktop_Admin.class);
                             }
+
+                            i.putExtras(bb);
+                            startActivity(i);
                             finish();
                         }
-                    //}
+                    }
                 }
             }
         });

@@ -43,7 +43,7 @@ public class Doctor extends AppCompatActivity {
 
         if (y.moveToFirst()) {
             String name = y.getString(1);
-            dname.setText(name);
+            dname.setText("Welcome Dr. "+name);
         }
     }
 

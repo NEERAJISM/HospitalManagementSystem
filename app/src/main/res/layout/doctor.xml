@@ -12,20 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="100"
         >
-
         <TextView
-            android:layout_weight="50"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal"
-            android:text="Welcome Dr. "
-            android:textSize="30dp" />
-
-        <TextView
-            android:layout_weight="50"
             android:id="@+id/tv_d_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
