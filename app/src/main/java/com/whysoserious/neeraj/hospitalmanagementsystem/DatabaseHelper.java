@@ -49,7 +49,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //*****************************TABLE FOR DOCTOR LEAVES**************************************
         try {
             db.execSQL("CREATE TABLE " + TABLE_NAME_D_LEAVES + " (" +
-                            "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                             "username VARCHAR," +
                             "password VARCHAR," +
                             "user_type VARCHAR," +

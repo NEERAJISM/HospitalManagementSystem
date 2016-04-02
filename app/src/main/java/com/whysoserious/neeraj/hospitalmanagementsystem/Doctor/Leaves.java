@@ -65,7 +65,13 @@ public class Leaves extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.view_previous:
+
+                Bundle b1 = new Bundle();
+                b1.putString("username",username);
+                b1.putString("password",password);
+                b1.putString("user_type",user_type);
                 Intent i = new Intent(Leaves.this, View_Leaves.class);
+                i.putExtras(b1);
                 startActivity(i);
                 break;
             default:
@@ -89,9 +95,6 @@ public class Leaves extends AppCompatActivity {
                     String dobs1 = ds1 + " " + ms1 + " " + ys1;
                     String dobs2 = ds2 + " " + ms2 + " " + ys2;
                     String nn = "N";
-
-                    Message.message(Leaves.this, dobs1);
-                    Message.message(Leaves.this, dobs2);
 
                     DatabaseHelper dbh = new DatabaseHelper(this);
                     boolean b = dbh.insert_leaves(username, password, user_type, dobs1, dobs2, nn);
