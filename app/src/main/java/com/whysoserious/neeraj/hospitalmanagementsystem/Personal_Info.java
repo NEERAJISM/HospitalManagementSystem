@@ -44,15 +44,15 @@ public class Personal_Info extends AppCompatActivity {
 
             name.setText(name1+" "+name2);
             age.setText(y.getString(3));
-            sex.setText(y.getString(4));
+            sex.setText(y.getString(6));
             dob.setText(y.getString(5));
-            bgroup.setText(y.getString(6));
+            bgroup.setText(y.getString(4));
             utype.setText(y.getString(7));
             city.setText(y.getString(8));
             pincode.setText(y.getString(9));
             mobno.setText(y.getString(10));
-            uname.setText(y.getString(11));
-            pword.setText(y.getString(12));
+            uname.setText(y.getString(12));
+            pword.setText(y.getString(11));
         }
     }
 }

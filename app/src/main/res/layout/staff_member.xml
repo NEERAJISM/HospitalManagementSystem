@@ -9,11 +9,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Staff Member"
-        android:textSize="30dp"
-        />
+        android:orientation="horizontal"
+        android:weightSum="100"
+        >
+
+        <TextView
+            android:layout_weight="50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text="Welcome "
+            android:textSize="30dp" />
+
+        <TextView
+            android:layout_weight="50"
+            android:id="@+id/tv_s_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textSize="30dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/b_s_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick"
+        android:padding="15dp"
+        android:text="Personal Info"
+        android:textAllCaps="false"
+        android:textSize="17dp" />
 
 </LinearLayout>
