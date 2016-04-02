@@ -25,7 +25,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-
         // TABLE FOR USER CREDENTIAL
         try {
             db.execSQL("CREATE TABLE " + TABLE_NAME_USER + " (" +
@@ -50,13 +49,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //*****************************TABLE FOR DOCTOR LEAVES**************************************
         try {
             db.execSQL("CREATE TABLE " + TABLE_NAME_D_LEAVES + " (" +
-                            "username VARCHAR" +
+                            "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                            "username VARCHAR," +
                             "password VARCHAR," +
                             "user_type VARCHAR," +
-                            "from VARCHAR" +
-                            "to VARCHAR" +
-                            "status VARCHAR" +
-                            ");"
+                            "date_from VARCHAR," +
+                            "date_to VARCHAR," +
+                            "approval VARCHAR);"
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,18 +118,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //insert leaves
 
-    public boolean insert_leaves(String username, String password, String user_type, String from, String to, String status) {
+    public boolean insert_leaves(String username, String password, String user_type, String dfrom, String dto, String approval) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db1 = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
         contentValues.put("password", password);
         contentValues.put("user_type", user_type);
-        contentValues.put("from", from);
-        contentValues.put("to", to);
-        contentValues.put("status", status);
+        contentValues.put("date_from", dfrom);
+        contentValues.put("date_to", dto);
+        contentValues.put("approval", approval);
 
-        long l = db.insert(TABLE_NAME_D_LEAVES, null, contentValues);
+        long l = db1.insert(TABLE_NAME_D_LEAVES, null, contentValues);
 
         if (l != -1) {
             return true;

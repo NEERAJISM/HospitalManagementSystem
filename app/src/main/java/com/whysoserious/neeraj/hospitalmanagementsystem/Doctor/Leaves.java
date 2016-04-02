@@ -23,7 +23,7 @@ public class Leaves extends AppCompatActivity {
 
     Spinner mm1, mm2;
     EditText dd1, dd2, yy1, yy2;
-    String ds1, ds2, ms1, ms2, ys1, ys2,username,password,user_type;
+    String ds1, ds2, ms1, ms2, ys1, ys2, username, password, user_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class Leaves extends AppCompatActivity {
                 Intent i = new Intent(Leaves.this, View_Leaves.class);
                 startActivity(i);
                 break;
-            default :
+            default:
                 ds1 = dd1.getText().toString();
                 ds2 = dd2.getText().toString();
                 ys1 = yy1.getText().toString();
@@ -76,9 +76,9 @@ public class Leaves extends AppCompatActivity {
                 ms1 = mm1.getSelectedItem().toString();
                 ms2 = mm2.getSelectedItem().toString();
 
-                if(ds1.equals("") || ds2.equals("") || ys1.equals("") || ys2.equals("")) {
+                if (ds1.equals("") || ds2.equals("") || ys1.equals("") || ys2.equals("")) {
                     Message.message(Leaves.this, "Please Fill in all your Details");
-                }else {
+                } else {
                     //CHECK DUPLICATES EXIST OR NOT
                     if (ds1.length() == 1)
                         ds1 = "0" + ds1;
@@ -88,14 +88,18 @@ public class Leaves extends AppCompatActivity {
 
                     String dobs1 = ds1 + " " + ms1 + " " + ys1;
                     String dobs2 = ds2 + " " + ms2 + " " + ys2;
+                    String nn = "N";
+
+                    Message.message(Leaves.this, dobs1);
+                    Message.message(Leaves.this, dobs2);
 
                     DatabaseHelper dbh = new DatabaseHelper(this);
-                    boolean b = dbh.insert_leaves(username, password, user_type, dobs1, dobs2, "N");
+                    boolean b = dbh.insert_leaves(username, password, user_type, dobs1, dobs2, nn);
 
-                    if(b){
-                        Message.message(Leaves.this,"Application Sent");
-                    }else {
-                        Message.message(Leaves.this,"This Application is Already Sent");
+                    if (b) {
+                        Message.message(Leaves.this, "Application Sent");
+                    } else {
+                        Message.message(Leaves.this, "This Application is Already Sent");
                     }
                     dbh.close();
                 }

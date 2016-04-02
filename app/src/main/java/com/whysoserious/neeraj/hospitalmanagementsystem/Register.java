@@ -149,7 +149,6 @@ public class Register extends AppCompatActivity {
 
                         boolean b = dbh.insert_user_credentials(fnames, lnames, ages, dobs, citys, pincodes, unames, passwords, mobnos, utypes, sexs, bgroups);
                         if (b) {
-
                             Intent i;
                             Bundle bb = new Bundle();
                             bb.putString("username", unames);
