@@ -1,6 +1,5 @@
 package com.whysoserious.neeraj.hospitalmanagementsystem.Patient;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,11 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.whysoserious.neeraj.hospitalmanagementsystem.DatabaseHelper;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Leaves;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Report_Upload;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Specialization;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Staff_View;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Feedback;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Personal_Info;
 import com.whysoserious.neeraj.hospitalmanagementsystem.R;
 

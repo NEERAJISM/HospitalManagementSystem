@@ -1,4 +1,4 @@
-package com.whysoserious.neeraj.hospitalmanagementsystem.Doctor;
+package com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Leaves;
 
 import android.database.Cursor;
 import android.os.Bundle;

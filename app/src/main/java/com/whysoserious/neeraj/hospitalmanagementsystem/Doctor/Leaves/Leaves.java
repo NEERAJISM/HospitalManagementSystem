@@ -1,4 +1,4 @@
-package com.whysoserious.neeraj.hospitalmanagementsystem.Doctor;
+package com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Leaves;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import com.whysoserious.neeraj.hospitalmanagementsystem.DatabaseHelper;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Message;
 import com.whysoserious.neeraj.hospitalmanagementsystem.R;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Register;
 
 import java.util.ArrayList;
 import java.util.List;

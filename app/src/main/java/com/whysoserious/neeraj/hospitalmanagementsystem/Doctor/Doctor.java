@@ -1,6 +1,5 @@
 package com.whysoserious.neeraj.hospitalmanagementsystem.Doctor;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,13 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.whysoserious.neeraj.hospitalmanagementsystem.DatabaseHelper;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Desktop_Admin.Desktop_Admin;
+import com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Leaves.Leaves;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Feedback;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Message;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Patient.Patient;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Personal_Info;
 import com.whysoserious.neeraj.hospitalmanagementsystem.R;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Staff_Member.Staff_Member;
 
 /**
  * Created by Neeraj on 17-Mar-16.
@@ -73,11 +69,13 @@ public class Doctor extends AppCompatActivity {
             case R.id.b_d_staff_assigned:
                 i = new Intent(Doctor.this, Staff_View.class);
                 break;
+            case R.id.b_d_slot:
+                i = new Intent(Doctor.this, D_Slot.class);
+                break;
             default:
                 i = new Intent(Doctor.this, Feedback.class);
                 break;
         }
-
         i.putExtras(b);
         startActivity(i);
     }

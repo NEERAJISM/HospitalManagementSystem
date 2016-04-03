@@ -73,7 +73,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Doctor.Leaves">
+        <activity android:name=".Doctor.Leaves.Leaves">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -101,7 +101,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Doctor.View_Leaves">
+        <activity android:name=".Doctor.Leaves.View_Leaves">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Doctor.D_Slot">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />

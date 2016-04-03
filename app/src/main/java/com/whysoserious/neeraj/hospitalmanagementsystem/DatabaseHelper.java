@@ -16,6 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "HMS_DATABASE.db";
     private static final String TABLE_NAME_USER = "USER_CREDENTIALS";
     private static final String TABLE_NAME_D_LEAVES = "DOCTOR_LEAVES";
+    private static final String TABLE_NAME_D_SLOT = "DOCTOR_SLOT";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -60,12 +61,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
+        //*****************************TABLE FOR DOCTOR SLOTS**************************************
+        try {
+            db.execSQL("CREATE TABLE " + TABLE_NAME_D_SLOT + " (" +
+                            "username VARCHAR," +
+                            "password VARCHAR," +
+                            "specialization VARCHAR," +
+                            "slot_from VARCHAR," +
+                            "slot_to VARCHAR," +
+                            "available VARCHAR);"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_D_LEAVES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_D_SLOT);
         onCreate(db);
     }
 
@@ -78,7 +94,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res;
         if (table.equals(TABLE_NAME_D_LEAVES)) {
             res = db.rawQuery("select * from " + TABLE_NAME_D_LEAVES + " where username=? and password=?", new String[]{user_name, password});
-
+        } else if (table.equals(TABLE_NAME_D_SLOT)) {
+            res = db.rawQuery("select * from " + TABLE_NAME_D_SLOT + " where username=? and password=?", new String[]{user_name, password});
         } else {
             res = db.rawQuery("select * from " + TABLE_NAME_USER + " where username=? and password=?", new String[]{user_name, password});
         }
@@ -128,8 +145,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("date_to", dto);
         contentValues.put("approval", approval);
 
-        long l = db1.insert(TABLE_NAME_D_LEAVES, null, contentValues);
+        long l = db1.insert(TABLE_NAME_D_SLOT, null, contentValues);
 
+        if (l != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    //**********************************************DOCTOR SLOT TABLE ************************************************************
+    //insert slots
+
+    public boolean insert_slot(String username, String password, String specialization, String dfrom, String dto, String available) {
+
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("password", password);
+        contentValues.put("specialization", specialization);
+        contentValues.put("slot_from", dfrom);
+        contentValues.put("slot_to", dto);
+        contentValues.put("available", available);
+
+        long l = db1.insert(TABLE_NAME_D_SLOT, null, contentValues);
+        if (l != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean update_slot(String username, String password, String specialization, String dfrom, String dto, String available) {
+
+        SQLiteDatabase db1 = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("password", password);
+        contentValues.put("specialization", specialization);
+        contentValues.put("slot_from", dfrom);
+        contentValues.put("slot_to", dto);
+        contentValues.put("available", available);
+
+        long l = db1.update(TABLE_NAME_D_SLOT, contentValues, "username=? and password=?", new String[]{username,password});
         if (l != -1) {
             return true;
         } else {
