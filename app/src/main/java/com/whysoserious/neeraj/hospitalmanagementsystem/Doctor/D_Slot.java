@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.whysoserious.neeraj.hospitalmanagementsystem.DatabaseHelper;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Message;
@@ -21,6 +22,7 @@ public class D_Slot extends AppCompatActivity {
 
     Spinner ss, ts, se, te;
     String s, e, hr, ap, username, password, user_type;
+    TextView tvs,tve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,17 @@ public class D_Slot extends AppCompatActivity {
         ts = (Spinner) findViewById(R.id.ts);
         se = (Spinner) findViewById(R.id.se);
         te = (Spinner) findViewById(R.id.te);
+        tvs = (TextView) findViewById(R.id.tv_current_slot_s);
+        tve = (TextView) findViewById(R.id.tv_current_slot_e);
+
+        DatabaseHelper db = new DatabaseHelper(this);
+        Cursor y = db.checkduplicates_in_user_credentials(username, password, getResources().getString(R.string.doctor_slot));
+
+        if (y.moveToFirst()){
+            tvs.setText(y.getString(3));
+            tve.setText(y.getString(4));
+        }
+
 
         ArrayList<String> hour = new ArrayList<>();
         ArrayList<String> ampm = new ArrayList<>();
@@ -61,28 +74,32 @@ public class D_Slot extends AppCompatActivity {
         ts.setAdapter(adaptera);
         se.setAdapter(adapterh);
         te.setAdapter(adaptera);
-
-        s = ss.getSelectedItem().toString();
-        s += ts.getSelectedItem().toString();
-        e = se.getSelectedItem().toString();
-        e += te.getSelectedItem().toString();
-
     }
 
     public void onClick(View view) {
+
+        s = ss.getSelectedItem().toString();
+        s+= " ";
+        s += ts.getSelectedItem().toString();
+        e = se.getSelectedItem().toString();
+        e+= " ";
+        e += te.getSelectedItem().toString();
+
+        tvs.setText(s);
+        tve.setText(e);
 
         DatabaseHelper db = new DatabaseHelper(this);
         Cursor y = db.checkduplicates_in_user_credentials(username, password, getResources().getString(R.string.doctor_slot));
 
         if (y.moveToFirst()) {
-            boolean b = db.update_slot(username, password, y.getString(2), s, e,"Y");
+            boolean b = db.update_slot(username, password, y.getString(2), s, e, "Y");
             if (b) {
                 Message.message(D_Slot.this, "Your Slot Has been Updated");
             } else {
                 Message.message(D_Slot.this, "Some Error Occured, Try Again");
             }
         } else {
-            boolean b = db.insert_slot(username, password, "-", s, e, "Y");
+            boolean b = db.insert_slot(username, password, "", s, e, "Y");
             if (b) {
                 Message.message(D_Slot.this, "Your Slot Has been Inserted");
             } else {
