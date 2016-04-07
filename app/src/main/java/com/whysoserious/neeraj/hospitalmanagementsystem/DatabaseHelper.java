@@ -145,7 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("date_to", dto);
         contentValues.put("approval", approval);
 
-        long l = db1.insert(TABLE_NAME_D_SLOT, null, contentValues);
+        long l = db1.insert(TABLE_NAME_D_LEAVES, null, contentValues);
 
         if (l != -1) {
             return true;
