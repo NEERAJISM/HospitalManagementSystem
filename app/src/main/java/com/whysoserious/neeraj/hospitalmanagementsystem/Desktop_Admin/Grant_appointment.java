@@ -1,9 +1,7 @@
 package com.whysoserious.neeraj.hospitalmanagementsystem.Desktop_Admin;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,47 +38,71 @@ public class Grant_appointment extends AppCompatActivity {
         u_p = new ArrayList<>();
         p_p = new ArrayList<>();
 
-        DatabaseHelper dbh = new DatabaseHelper(this);
+        final DatabaseHelper dbh = new DatabaseHelper(this);
         Cursor y = dbh.checkduplicates_in_user_credentials("", "", getResources().getString(R.string.all_pending_appointment));
 
         if (y.moveToFirst()) {
-            if (y.getString(4).equals("W")) {
-                DatabaseHelper dbh1 = new DatabaseHelper(this);
-                Cursor z1 = dbh1.checkduplicates_in_user_credentials(y.getString(0), y.getString(1), getResources().getString(R.string.user_credentials));
-                DatabaseHelper dbh2 = new DatabaseHelper(this);
-                Cursor z2 = dbh2.checkduplicates_in_user_credentials(y.getString(2), y.getString(3), getResources().getString(R.string.user_credentials));
+            while (true) {
 
-                u_p.add(y.getString(0));
-                p_p.add(y.getString(1));
+                //pateinet approvl has three mode W - wait, A - approved, F - finished
 
-                if (z1.moveToNext()) {
-                    pat.add(z1.getString(1) + " " + z1.getString(2));
+                if (y.getString(4).equals("W")) {
+                    DatabaseHelper dbh1 = new DatabaseHelper(this);
+                    Cursor z1 = dbh1.checkduplicates_in_user_credentials(y.getString(0), y.getString(1), getResources().getString(R.string.user_credentials));
+                    DatabaseHelper dbh2 = new DatabaseHelper(this);
+                    Cursor z2 = dbh2.checkduplicates_in_user_credentials(y.getString(2), y.getString(3), getResources().getString(R.string.user_credentials));
+                    u_p.add(y.getString(0));
+                    p_p.add(y.getString(1));
+
+                    if (z1.moveToNext()) {
+                        pat.add(z1.getString(1) + " " + z1.getString(2));
+                    }
+
+                    if (z2.moveToNext()) {
+                        doc.add(z2.getString(1) + " " + z2.getString(2));
+                    }
+                    pro.add(y.getString(5));
+
+                    dbh1.close();
+                    dbh2.close();
                 }
 
-                if (z2.moveToNext()) {
-                    doc.add(z2.getString(1) + " " + z2.getString(2));
-                }
+                if (y.isLast())
+                    break;
 
-                pro.add(y.getString(4));
+                y.moveToNext();
             }
+
+            rowItems = new ArrayList<>();
+
+            for (int i = 0; i < doc.size(); i++) {
+                RowItem item = new RowItem(doc.get(i), pat.get(i), pro.get(i));
+                rowItems.add(item);
+            }
+
+            CustomListViewAdapter adapter = new CustomListViewAdapter(this, R.layout.custom_adapter, rowItems);
+            lv_appointment.setAdapter(adapter);
         } else {
             Message.message(Grant_appointment.this, "No Pending Apppointments");
             finish();
         }
 
-        rowItems = new ArrayList<>();
-        for (int i = 0; i < doc.size(); i++) {
-            RowItem item = new RowItem(doc.get(i), pat.get(i), pro.get(i));
-            rowItems.add(item);
-        }
-
-        CustomListViewAdapter adapter = new CustomListViewAdapter(this, R.layout.custom_adapter, rowItems);
-        lv_appointment.setAdapter(adapter);
-
         lv_appointment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Cursor x = dbh.checkduplicates_in_user_credentials(u_p.get(position), p_p.get(position), pro.get(position));
+                boolean y = false;
+                if (x.moveToFirst()) {
+                    y = dbh.update_doctor_patient(x.getString(0), x.getString(1), x.getString(2), x.getString(3), "A", x.getString(5), x.getString(6), x.getString(7));
+                }
+
+                if (y) {
+                    Message.message(Grant_appointment.this, "Application Approved");
+                    finish();
+                } else {
+                    Message.message(Grant_appointment.this, "Not Approved");
+                }
             }
         });
     }

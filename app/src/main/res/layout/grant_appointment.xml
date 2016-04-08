@@ -13,10 +13,12 @@
         android:textSize="22dp" />
 
     <ListView
-        android:clickable="true"
         android:id="@+id/lv_pending_appontments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
         android:divider="#2f2f2f"
-        android:dividerHeight="0.5dp" />
+        android:dividerHeight="0.5dp"
+        android:drawSelectorOnTop="true">
+    </ListView>
 </LinearLayout>

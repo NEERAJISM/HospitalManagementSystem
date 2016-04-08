@@ -120,6 +120,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             res = db.rawQuery("select * from " + TABLE_NAME_D_SLOT, new String[]{});
         }else if (table.equals("all_pending_appointment")) {
             res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT, new String[]{});
+        }else{
+            res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT + " where p_username=? and p_password=? and problem=?", new String[]{user_name, password, table});
         }
         return res;
     }
@@ -152,8 +154,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
-    //*************************************************DOCTOR LEAVES TABLE ********************************************************
 
+    //*************************************************DOCTOR LEAVES TABLE ********************************************************
     //insert leaves
 
     public boolean insert_leaves(String username, String password, String user_type, String dfrom, String dto, String approval) {
@@ -259,7 +261,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("fees_paid", fees_paid);
         contentValues.put("report", report);
 
-        long l = db1.update(TABLE_NAME_DOCTOR_PATIENT, contentValues, "username=? and password=?", new String[]{p_username, p_password});
+        long l = db1.update(TABLE_NAME_DOCTOR_PATIENT, contentValues, "p_username=? and p_password=? and problem=?", new String[]{p_username, p_password,problem});
         if (l != -1) {
             return true;
         } else {

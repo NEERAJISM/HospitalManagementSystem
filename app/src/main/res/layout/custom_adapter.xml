@@ -77,4 +77,13 @@
             android:textSize="15dp" />
     </LinearLayout>
 
+    <!--<Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accept"
+        android:textAllCaps="false"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        />-->
+
 </LinearLayout>
