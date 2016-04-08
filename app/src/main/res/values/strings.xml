@@ -3,4 +3,5 @@
     <string name="user_credentials">"USER_CREDENTIALS</string>
     <string name="doctor_leaves">DOCTOR_LEAVES</string>
     <string name="doctor_slot">DOCTOR_SLOT</string>
+    <string name="all_doctor_slots">all_doctor_slots</string>
 </resources>

@@ -63,11 +63,14 @@ public class Specialization extends AppCompatActivity {
                     }
                 }
             }
-
-            ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sp);
-            lvs.setAdapter(adapter);
+            if (sp.size() > 0) {
+                ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sp);
+                lvs.setAdapter(adapter);
+            }else {
+                Message.message(Specialization.this, "Sorry, You have No Specialization");
+            }
         } else {
-           Message.message(Specialization.this,"Sorry, You have No Specialization");
+            Message.message(Specialization.this, "Sorry, You have No Specialization");
         }
     }
 

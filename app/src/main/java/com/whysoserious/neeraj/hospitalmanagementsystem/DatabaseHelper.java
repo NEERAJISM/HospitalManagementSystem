@@ -25,7 +25,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         // TABLE FOR USER CREDENTIAL
         try {
             db.execSQL("CREATE TABLE " + TABLE_NAME_USER + " (" +
@@ -86,18 +85,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //*************************************USER CREDENTIALS TABLE* *********************************************************
-    //CHECHK THAT THE REGISTERED USER ALREADY EXIST ******** and returns all favourable values
+    //CHECHK THAT THE REGISTERED USER ALREADY EXIST ******** AND RETURNS ALL FAVOURABLE VALUES
 
+    //CURSUR RETRUN FUNCTION
     public Cursor checkduplicates_in_user_credentials(String user_name, String password, String table) {
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = null;
 
-        Cursor res;
         if (table.equals(TABLE_NAME_D_LEAVES)) {
             res = db.rawQuery("select * from " + TABLE_NAME_D_LEAVES + " where username=? and password=?", new String[]{user_name, password});
         } else if (table.equals(TABLE_NAME_D_SLOT)) {
             res = db.rawQuery("select * from " + TABLE_NAME_D_SLOT + " where username=? and password=?", new String[]{user_name, password});
-        } else {
+        } else if (table.equals(TABLE_NAME_USER)) {
             res = db.rawQuery("select * from " + TABLE_NAME_USER + " where username=? and password=?", new String[]{user_name, password});
+        } else if (table.equals("all_doctor_slots")) {
+            res = db.rawQuery("select * from " + TABLE_NAME_D_SLOT, new String[]{});
         }
         return res;
     }
@@ -154,8 +156,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-
-    //**********************************************DOCTOR SLOT TABLE ************************************************************
+    //**********************************************DOCTOR SLOT TABLE ***********************************************************
     //insert slots
 
     public boolean insert_slot(String username, String password, String specialization, String dfrom, String dto, String available) {
@@ -189,7 +190,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("slot_to", dto);
         contentValues.put("available", available);
 
-        long l = db1.update(TABLE_NAME_D_SLOT, contentValues, "username=? and password=?", new String[]{username,password});
+        long l = db1.update(TABLE_NAME_D_SLOT, contentValues, "username=? and password=?", new String[]{username, password});
         if (l != -1) {
             return true;
         } else {

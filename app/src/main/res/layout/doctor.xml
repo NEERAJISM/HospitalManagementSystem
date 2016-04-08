@@ -63,7 +63,7 @@
         android:layout_gravity="center"
         android:onClick="onClick"
         android:padding="15dp"
-        android:text="Set Referrel Timings"
+        android:text="Set Your Referrel Timings"
         android:textAllCaps="false"
         android:textSize="17dp" />
 
@@ -99,6 +99,4 @@
         android:text="Give/View Feedback"
         android:textAllCaps="false"
         android:textSize="17dp" />
-
-
 </LinearLayout>

@@ -43,20 +43,18 @@ public class D_Slot extends AppCompatActivity {
 
         DatabaseHelper db = new DatabaseHelper(this);
         Cursor y = db.checkduplicates_in_user_credentials(username, password, getResources().getString(R.string.doctor_slot));
-
         if (y.moveToFirst()){
             tvs.setText(y.getString(3));
             tve.setText(y.getString(4));
         }
 
-
         ArrayList<String> hour = new ArrayList<>();
         ArrayList<String> ampm = new ArrayList<>();
 
         String ss1;
-        for (int i = 0; i < 24; i++) {
-            ss1 = Integer.toString(i);
+        for (int i = 9; i <= 21; i++) {
 
+            ss1 = Integer.toString(i);
             if (ss1.length() == 1)
                 ss1 = "0" + ss1;
 

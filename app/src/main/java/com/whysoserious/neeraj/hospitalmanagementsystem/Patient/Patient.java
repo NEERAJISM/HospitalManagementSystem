@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.whysoserious.neeraj.hospitalmanagementsystem.DatabaseHelper;
+import com.whysoserious.neeraj.hospitalmanagementsystem.Feedback;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Personal_Info;
 import com.whysoserious.neeraj.hospitalmanagementsystem.R;
 
@@ -54,8 +55,11 @@ public class Patient extends AppCompatActivity {
             case R.id.b_p_info:
                 i = new Intent(Patient.this, Personal_Info.class);
                 break;
+            case R.id.b_p_appointment:
+                i = new Intent(Patient.this, Appointment.class);
+                break;
             default:
-                i = new Intent(Patient.this, Personal_Info.class);
+                i = new Intent(Patient.this, Feedback.class);
                 break;
         }
 
