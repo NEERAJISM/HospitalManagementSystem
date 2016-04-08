@@ -68,7 +68,7 @@ public class Doctor extends AppCompatActivity {
                 i = new Intent(Doctor.this, Report_Upload.class);
                 break;
             case R.id.b_d_staff_assigned:
-                i = new Intent(Doctor.this, Staff_View.class);
+                i = new Intent(Doctor.this, View_Assigned_Staff.class);
                 break;
             case R.id.b_d_slot:
                 i = new Intent(Doctor.this, D_Slot.class);

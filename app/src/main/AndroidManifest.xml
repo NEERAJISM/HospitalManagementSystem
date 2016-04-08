@@ -87,13 +87,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Doctor.Staff_View">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name=".Feedback">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -193,6 +186,27 @@
         </activity>
 
         <activity android:name=".Desktop_Admin.Remaining_patient_bills">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Staff_Member.Assigned_Doctors">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Doctor.View_Assigned_Staff">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Desktop_Admin.Assign_Staff">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />

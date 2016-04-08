@@ -153,13 +153,13 @@ public class Register extends AppCompatActivity {
                             Bundle bb = new Bundle();
                             bb.putString("username", unames);
                             bb.putString("password", passwords);
-                            bb.putString("user_type",utypes);
+                            bb.putString("user_type", utypes);
 
                             if (utypes.equals("Patient")) {
                                 i = new Intent(Register.this, Patient.class);
                             } else if (utypes.equals("Doctor")) {
                                 i = new Intent(Register.this, Doctor.class);
-                            } else if (utypes.equals("Staff_Member")) {
+                            } else if (utypes.equals("Staff Member")) {
                                 i = new Intent(Register.this, Staff_Member.class);
                             } else {
                                 i = new Intent(Register.this, Desktop_Admin.class);

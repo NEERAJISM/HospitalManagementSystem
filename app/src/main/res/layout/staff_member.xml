@@ -37,6 +37,17 @@
         android:textSize="17dp" />
 
     <Button
+        android:id="@+id/b_s_assigned_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick"
+        android:padding="15dp"
+        android:text="List of Assigned Doctors"
+        android:textAllCaps="false"
+        android:textSize="17dp" />
+
+    <Button
         android:id="@+id/b_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

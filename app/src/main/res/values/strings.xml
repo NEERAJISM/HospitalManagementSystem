@@ -6,4 +6,5 @@
     <string name="all_doctor_slots">all_doctor_slots</string>
     <string name="all_pending_appointment">all_pending_appointment</string>
     <string name="doctor_patient">DOCTOR_PATIENT</string>
+    <string name="staff">STAFF</string>
 </resources>

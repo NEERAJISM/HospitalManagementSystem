@@ -1,6 +1,5 @@
 package com.whysoserious.neeraj.hospitalmanagementsystem.Staff_Member;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.whysoserious.neeraj.hospitalmanagementsystem.DatabaseHelper;
-import com.whysoserious.neeraj.hospitalmanagementsystem.Doctor.Staff_View;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Personal_Info;
 import com.whysoserious.neeraj.hospitalmanagementsystem.R;
 
@@ -54,6 +52,9 @@ public class Staff_Member extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.b_s_info:
                 i = new Intent(Staff_Member.this, Personal_Info.class);
+                break;
+            case R.id.b_s_assigned_doctor:
+                i = new Intent(Staff_Member.this, Assigned_Doctors.class);
                 break;
             default:
                 i = new Intent(Staff_Member.this, Personal_Info.class);

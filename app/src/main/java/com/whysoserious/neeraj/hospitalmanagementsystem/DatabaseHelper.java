@@ -18,6 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_D_LEAVES = "DOCTOR_LEAVES";
     private static final String TABLE_NAME_D_SLOT = "DOCTOR_SLOT";
     private static final String TABLE_NAME_DOCTOR_PATIENT = "DOCTOR_PATIENT";
+    private static final String TABLE_NAME_STAFF = "STAFF";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -91,6 +92,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
+        //*****************************TABLE FOR STAFF **************************************
+        try {
+            db.execSQL("CREATE TABLE " + TABLE_NAME_STAFF + " (" +
+                            "S_username VARCHAR," +
+                            "S_password VARCHAR," +
+                            "d_username VARCHAR," +
+                            "d_password VARCHAR," +
+                            "assigned VARCHAR);"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -99,6 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_D_LEAVES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_D_SLOT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DOCTOR_PATIENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STAFF);
         onCreate(db);
     }
 
@@ -118,8 +132,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             res = db.rawQuery("select * from " + TABLE_NAME_USER + " where username=? and password=?", new String[]{user_name, password});
         } else if (table.equals(TABLE_NAME_DOCTOR_PATIENT)) {
             res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT + " where d_username=? and d_password=?", new String[]{user_name, password});
+        } else if (table.equals("get_all_doctors")) {
+            res = db.rawQuery("select * from " + TABLE_NAME_USER, new String[]{});
         } else if (table.equals("all_doctor_slots")) {
             res = db.rawQuery("select * from " + TABLE_NAME_D_SLOT, new String[]{});
+        } else if (table.equals(TABLE_NAME_STAFF)) {
+            res = db.rawQuery("select * from " + TABLE_NAME_STAFF, new String[]{});
         } else if (table.equals("all_pending_appointment")) {
             res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT, new String[]{});
         } else if (table.equals("patient_identify")) {
@@ -270,5 +288,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } else {
             return false;
         }
+    }
+
+
+    //**********************************************STAFF TABLE ***********************************************************
+    //insert appointment
+
+    public boolean insert_staff(String s_username, String s_password, String d_username, String d_password, String assigned) {
+
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("s_username", s_username);
+        contentValues.put("s_password", s_password);
+        contentValues.put("d_username", d_username);
+        contentValues.put("d_password", d_password);
+        contentValues.put("assigned", assigned);
+
+        long l = db1.insert(TABLE_NAME_STAFF, null, contentValues);
+        if (l != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //update appointment
+
+    public boolean update_doctor_patient(String s_username, String s_password, String d_username, String d_password, String assigned) {
+
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("s_username", s_username);
+        contentValues.put("s_password", s_password);
+        contentValues.put("d_username", d_username);
+        contentValues.put("d_password", d_password);
+        contentValues.put("assigned", assigned);
+
+        long l = db1.update(TABLE_NAME_STAFF, contentValues, "s_username=? and s_password=?", new String[]{s_username, s_password});
+        if (l != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Cursor checkduplicates_in_staff(String s, String s1, String s2, String s3) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME_STAFF + " where s_username=? and s_password=? and d_username=? and d_password=?", new String[]{s, s1, s2, s3});
+        return res;
     }
 }
