@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.whysoserious.neeraj.hospitalmanagementsystem.DatabaseHelper;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Feedback;
+import com.whysoserious.neeraj.hospitalmanagementsystem.Patient.View_Report.View_Report;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Personal_Info;
 import com.whysoserious.neeraj.hospitalmanagementsystem.R;
 
@@ -17,7 +18,7 @@ import com.whysoserious.neeraj.hospitalmanagementsystem.R;
  */
 public class Patient extends AppCompatActivity {
 
-    String username, password,user_type;
+    String username, password, user_type;
     DatabaseHelper dbh;
     TextView pname;
 
@@ -57,6 +58,9 @@ public class Patient extends AppCompatActivity {
                 break;
             case R.id.b_p_appointment:
                 i = new Intent(Patient.this, Appointment.class);
+                break;
+            case R.id.b_p_report:
+                i = new Intent(Patient.this, View_Report.class);
                 break;
             default:
                 i = new Intent(Patient.this, Feedback.class);

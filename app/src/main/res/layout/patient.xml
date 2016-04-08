@@ -46,6 +46,17 @@
         android:textSize="17dp" />
 
     <Button
+        android:id="@+id/b_p_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick"
+        android:padding="15dp"
+        android:text="View Reports"
+        android:textAllCaps="false"
+        android:textSize="17dp" />
+
+    <Button
         android:id="@+id/b_p_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

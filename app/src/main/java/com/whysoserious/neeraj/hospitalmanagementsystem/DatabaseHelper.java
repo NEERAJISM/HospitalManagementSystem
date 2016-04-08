@@ -116,11 +116,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             res = db.rawQuery("select * from " + TABLE_NAME_D_SLOT + " where username=? and password=?", new String[]{user_name, password});
         } else if (table.equals(TABLE_NAME_USER)) {
             res = db.rawQuery("select * from " + TABLE_NAME_USER + " where username=? and password=?", new String[]{user_name, password});
+        } else if (table.equals(TABLE_NAME_DOCTOR_PATIENT)) {
+            res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT + " where d_username=? and d_password=?", new String[]{user_name, password});
         } else if (table.equals("all_doctor_slots")) {
             res = db.rawQuery("select * from " + TABLE_NAME_D_SLOT, new String[]{});
-        }else if (table.equals("all_pending_appointment")) {
+        } else if (table.equals("all_pending_appointment")) {
             res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT, new String[]{});
-        }else{
+        } else if (table.equals("patient_identify")) {
+            res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT + " where p_username=? and p_password=?", new String[]{user_name, password});
+        } else {
             res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT + " where p_username=? and p_password=? and problem=?", new String[]{user_name, password, table});
         }
         return res;
@@ -221,11 +225,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     //**********************************************DOCTOR SLOT TABLE ***********************************************************
     //insert appointment
 
-    public boolean insert_doctor_patient(String p_username, String p_password,String d_username, String d_password, String granted, String problem, String fees_paid, String report) {
+    public boolean insert_doctor_patient(String p_username, String p_password, String d_username, String d_password, String granted, String problem, String fees_paid, String report) {
 
         SQLiteDatabase db1 = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -248,7 +251,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //update appointment
 
-    public boolean update_doctor_patient(String p_username, String p_password,String d_username, String d_password, String granted, String problem, String fees_paid, String report) {
+    public boolean update_doctor_patient(String p_username, String p_password, String d_username, String d_password, String granted, String problem, String fees_paid, String report) {
 
         SQLiteDatabase db1 = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -261,7 +264,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("fees_paid", fees_paid);
         contentValues.put("report", report);
 
-        long l = db1.update(TABLE_NAME_DOCTOR_PATIENT, contentValues, "p_username=? and p_password=? and problem=?", new String[]{p_username, p_password,problem});
+        long l = db1.update(TABLE_NAME_DOCTOR_PATIENT, contentValues, "p_username=? and p_password=? and problem=?", new String[]{p_username, p_password, problem});
         if (l != -1) {
             return true;
         } else {

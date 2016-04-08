@@ -80,7 +80,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Doctor.Report_Upload">
+        <activity android:name=".Doctor.Doctor_Patient.Report_Upload">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -158,6 +158,27 @@
         </activity>
 
         <activity android:name=".Desktop_Admin.Grant_appointment">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Doctor.Doctor_Patient.Write_Report">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Patient.View_Report.View_Report">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Patient.View_Report.Final_View_Report">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
