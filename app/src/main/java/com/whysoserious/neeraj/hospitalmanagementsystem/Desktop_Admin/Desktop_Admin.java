@@ -58,6 +58,9 @@ public class Desktop_Admin extends AppCompatActivity {
             case R.id.b_da_patient_appointment:
                 i = new Intent(Desktop_Admin.this, Grant_appointment.class);
                 break;
+            case R.id.b_da_remaining_bills:
+                i = new Intent(Desktop_Admin.this, Remaining_patient_bills.class);
+                break;
             default:
                 i = new Intent(Desktop_Admin.this, Personal_Info.class);
                 break;

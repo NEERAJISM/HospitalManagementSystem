@@ -57,6 +57,17 @@
         android:textSize="17dp" />
 
     <Button
+        android:id="@+id/b_p_bills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClick"
+        android:padding="15dp"
+        android:text="Remaining Bills"
+        android:textAllCaps="false"
+        android:textSize="17dp" />
+
+    <Button
         android:id="@+id/b_p_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

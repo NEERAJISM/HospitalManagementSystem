@@ -62,6 +62,9 @@ public class Patient extends AppCompatActivity {
             case R.id.b_p_report:
                 i = new Intent(Patient.this, View_Report.class);
                 break;
+            case R.id.b_p_bills:
+                i = new Intent(Patient.this, Bills.class);
+                break;
             default:
                 i = new Intent(Patient.this, Feedback.class);
                 break;
