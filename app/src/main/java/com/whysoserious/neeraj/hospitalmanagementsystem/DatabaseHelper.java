@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_USER = "USER_CREDENTIALS";
     private static final String TABLE_NAME_D_LEAVES = "DOCTOR_LEAVES";
     private static final String TABLE_NAME_D_SLOT = "DOCTOR_SLOT";
+    private static final String TABLE_NAME_DOCTOR_PATIENT = "DOCTOR_PATIENT";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -74,6 +75,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
+        //*****************************TABLE FOR DOCTOR PATIENT**************************************
+        try {
+            db.execSQL("CREATE TABLE " + TABLE_NAME_DOCTOR_PATIENT + " (" +
+                            "p_username VARCHAR," +
+                            "p_password VARCHAR," +
+                            "d_username VARCHAR," +
+                            "d_password VARCHAR," +
+                            "granted VARCHAR," +
+                            "problem VARCHAR," +
+                            "fees_paid VARCHAR," +
+                            "report VARCHAR);"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -81,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_D_LEAVES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_D_SLOT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DOCTOR_PATIENT);
         onCreate(db);
     }
 
@@ -100,6 +118,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             res = db.rawQuery("select * from " + TABLE_NAME_USER + " where username=? and password=?", new String[]{user_name, password});
         } else if (table.equals("all_doctor_slots")) {
             res = db.rawQuery("select * from " + TABLE_NAME_D_SLOT, new String[]{});
+        }else if (table.equals("all_pending_appointment")) {
+            res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT, new String[]{});
         }
         return res;
     }
@@ -191,6 +211,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("available", available);
 
         long l = db1.update(TABLE_NAME_D_SLOT, contentValues, "username=? and password=?", new String[]{username, password});
+        if (l != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    //**********************************************DOCTOR SLOT TABLE ***********************************************************
+    //insert appointment
+
+    public boolean insert_doctor_patient(String p_username, String p_password,String d_username, String d_password, String granted, String problem, String fees_paid, String report) {
+
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("p_username", p_username);
+        contentValues.put("p_password", p_password);
+        contentValues.put("d_username", d_username);
+        contentValues.put("d_password", d_password);
+        contentValues.put("granted", granted);
+        contentValues.put("problem", problem);
+        contentValues.put("fees_paid", fees_paid);
+        contentValues.put("report", report);
+
+        long l = db1.insert(TABLE_NAME_DOCTOR_PATIENT, null, contentValues);
+        if (l != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //update appointment
+
+    public boolean update_doctor_patient(String p_username, String p_password,String d_username, String d_password, String granted, String problem, String fees_paid, String report) {
+
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("p_username", p_username);
+        contentValues.put("p_password", p_password);
+        contentValues.put("d_username", d_username);
+        contentValues.put("d_password", d_password);
+        contentValues.put("granted", granted);
+        contentValues.put("problem", problem);
+        contentValues.put("fees_paid", fees_paid);
+        contentValues.put("report", report);
+
+        long l = db1.update(TABLE_NAME_DOCTOR_PATIENT, contentValues, "username=? and password=?", new String[]{p_username, p_password});
         if (l != -1) {
             return true;
         } else {
