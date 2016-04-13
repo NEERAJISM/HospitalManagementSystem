@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.whysoserious.neeraj.hospitalmanagementsystem.DatabaseHelper;
+import com.whysoserious.neeraj.hospitalmanagementsystem.Feedback;
 import com.whysoserious.neeraj.hospitalmanagementsystem.Personal_Info;
 import com.whysoserious.neeraj.hospitalmanagementsystem.R;
 
@@ -57,7 +58,7 @@ public class Staff_Member extends AppCompatActivity {
                 i = new Intent(Staff_Member.this, Assigned_Doctors.class);
                 break;
             default:
-                i = new Intent(Staff_Member.this, Personal_Info.class);
+                i = new Intent(Staff_Member.this, Feedback.class);
                 break;
         }
 

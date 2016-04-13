@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_D_SLOT = "DOCTOR_SLOT";
     private static final String TABLE_NAME_DOCTOR_PATIENT = "DOCTOR_PATIENT";
     private static final String TABLE_NAME_STAFF = "STAFF";
+    private static final String TABLE_NAME_FEEDBACK = "FEEDBACK";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -104,6 +105,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try {
+            db.execSQL("CREATE TABLE " + TABLE_NAME_FEEDBACK + " (" +
+                            "username VARCHAR," +
+                            "password VARCHAR," +
+                            "feedback VARCHAR);"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -113,6 +124,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_D_SLOT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DOCTOR_PATIENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STAFF);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FEEDBACK);
         onCreate(db);
     }
 
@@ -142,6 +154,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT, new String[]{});
         } else if (table.equals("patient_identify")) {
             res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT + " where p_username=? and p_password=?", new String[]{user_name, password});
+        } else if (table.equals(TABLE_NAME_FEEDBACK)) {
+            res = db.rawQuery("select * from " + TABLE_NAME_FEEDBACK + " where username=? and password=?", new String[]{user_name, password});
+        } else if (table.equals("all_feedback")) {
+            res = db.rawQuery("select * from " + TABLE_NAME_FEEDBACK, new String[]{});
         } else {
             res = db.rawQuery("select * from " + TABLE_NAME_DOCTOR_PATIENT + " where p_username=? and p_password=? and problem=?", new String[]{user_name, password, table});
         }
@@ -203,7 +219,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean delete_user_credentials(String ou, String op) {
         SQLiteDatabase db1 = this.getWritableDatabase();
-        long l = db1.delete(TABLE_NAME_USER, "username=? and password=?", new String[]{ou,op});
+        long l = db1.delete(TABLE_NAME_USER, "username=? and password=?", new String[]{ou, op});
 
         if (l != -1) {
             return true;
@@ -371,5 +387,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME_STAFF + " where s_username=? and s_password=? and d_username=? and d_password=?", new String[]{s, s1, s2, s3});
         return res;
+    }
+
+
+    //********************************************FEEDBACK*******************************
+    public boolean insert_feedback(String username, String password, String feecback) {
+
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("password", password);
+        contentValues.put("feedback", feecback);
+
+        long l = db1.insert(TABLE_NAME_FEEDBACK, null, contentValues);
+        if (l != -1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
