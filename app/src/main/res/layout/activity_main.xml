@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="15dp"
+        android:onClick="onClick"
         android:text="Doctors Available"
         android:textSize="17dp" />
 

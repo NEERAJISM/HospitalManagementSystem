@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Neeraj on 02-Apr-16.
  */
-public class Specialization extends AppCompatActivity {
+public class    Specialization extends AppCompatActivity {
 
     ListView lvs;
     String s, username, password, user_type;

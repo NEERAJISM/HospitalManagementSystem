@@ -34,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onClick(View view) {
+        Intent i = new Intent(MainActivity.this, Doctors_available.class);
+        startActivity(i);
+    }
 }
