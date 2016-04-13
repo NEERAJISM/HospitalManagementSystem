@@ -65,7 +65,7 @@ public class Desktop_Admin extends AppCompatActivity {
                 i = new Intent(Desktop_Admin.this, Assign_Staff.class);
                 break;
             default:
-                i = new Intent(Desktop_Admin.this, Personal_Info.class);
+                i = new Intent(Desktop_Admin.this, Delete_Users.class);
                 break;
         }
 

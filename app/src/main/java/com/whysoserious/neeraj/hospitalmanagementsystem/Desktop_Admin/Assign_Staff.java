@@ -44,7 +44,7 @@ public class Assign_Staff extends AppCompatActivity {
 
         if (y.moveToFirst()) {
             while (true) {
-                if (y.getString(7).equals("Doctor")) {
+                if ((y.getString(7)).equals("Doctor")) {
                     docs.add("Dr. " + y.getString(1) + " " + y.getString(2));
                     d_u.add(y.getString(12));
                     d_p.add(y.getString(11));

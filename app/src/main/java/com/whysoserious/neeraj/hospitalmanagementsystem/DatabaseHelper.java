@@ -177,7 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean update_user_credentials(String ou,String op,String fnames, String lnames, String ages, String dobs, String citys, String pincodes, String unames, String passwords, String mobnos, String utypes, String sexs, String bgroups) {
+    public boolean update_user_credentials(String ou, String op, String fnames, String lnames, String ages, String dobs, String citys, String pincodes, String unames, String passwords, String mobnos, String utypes, String sexs, String bgroups) {
         SQLiteDatabase db1 = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("first_name", fnames);
@@ -201,7 +201,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean delete_user_credentials(String ou, String op) {
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        long l = db1.delete(TABLE_NAME_USER, "username=? and password=?", new String[]{ou,op});
 
+        if (l != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //*************************************************DOCTOR LEAVES TABLE ********************************************************
     //insert leaves
