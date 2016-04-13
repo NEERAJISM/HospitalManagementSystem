@@ -352,6 +352,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:text="Update"
+                android:onClick="onClick"
                 />
         </LinearLayout>
     </ScrollView>
